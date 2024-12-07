@@ -1,0 +1,26 @@
+name: DeployFront
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - name: Clone code
+      uses: actions/checkout@v2
+    - name: Tag image if exists
+      run: |
+        if docker image inspect turnappback:lts > /dev/null 2>&1; then
+          docker tag turnappback:lts turnappback:old
+        else
+          echo "Image turnappback:lts does not exist"
+        fi
+    - name: Deploy Dockerfile
+      run: docker build -f ./Dockerfile . -t turnappback:lts --no-cache
+    - name: Delete container if exist
+      run: docker rm -f turnappback
+    - name: Crear el contenedor
+      run: docker run -d -p 8080:8080 --name turnappback turnappback:lts
+    - name: Delete image if exist
+      run: docker rmi -f turnappback:old

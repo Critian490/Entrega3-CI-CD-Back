@@ -1,0 +1,31 @@
+# Archivos y carpetas de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+.env/
+
+# Archivos de configuración de IDE
+.vscode/
+.idea/
+
+# Archivos de logs
+*.log
+
+# Archivos de configuración de sistema
+.DS_Store
+Thumbs.db
+
+#Archivo Env (variables de entorno)
+.env
+
+#Archivos de migraciones
+**/migrations/*
+**/migrations/__init__.py
